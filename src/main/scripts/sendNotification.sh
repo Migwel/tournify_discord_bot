@@ -1,0 +1,1 @@
+curl -H "Content-Type: application/json" -X POST -d '{"content":"TEST"}' http://localhost:8091/notification | json_pp
