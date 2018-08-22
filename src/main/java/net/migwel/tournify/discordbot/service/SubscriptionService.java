@@ -23,6 +23,6 @@ public class SubscriptionService {
         String callBackUrl = localUrl +"/notification/"+ channelId;
         SubscriptionRequest subscriptionRequest = new SubscriptionRequest(tournamentUrl, callBackUrl);
         log.info("Subscribing to "+ tournamentUrl);
-        restTemplate.put(remoteUrl, subscriptionRequest);
+        restTemplate.postForEntity(remoteUrl, subscriptionRequest, null);
     }
 }
