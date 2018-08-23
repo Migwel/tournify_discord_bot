@@ -17,6 +17,12 @@ public class SubscriptionListener implements MessageCreateListener {
 
     private static final Logger log = LoggerFactory.getLogger(SubscriptionListener.class);
 
+    private enum ActionType {
+        Subscribe,
+        Unsubscribe,
+        ;
+    }
+
     @Autowired
     private DiscordProperties discordProperties;
 
@@ -42,23 +48,41 @@ public class SubscriptionListener implements MessageCreateListener {
         }
 
         String[] messageSplits = message.split("\\s");
-        if(!validParameters(messageSplits)) {
+        ActionType actionType = findActionType(messageSplits);
+        if(actionType == null) {
             event.getChannel().sendMessage(usage());
+            return;
         }
 
-        subscriptionService.addSubscription(event.getChannel().getId(), messageSplits[2]);
+        switch (actionType) {
+            case Subscribe:
+                subscriptionService.addSubscription(event.getChannel().getId(), messageSplits[2]);
+                break;
+            case Unsubscribe:
+                subscriptionService.deleteSubscription(event.getChannel().getId(), messageSplits[2]);
+                break;
+        }
+
+
     }
 
-    private boolean validParameters(String[] messageSplits) {
+    private ActionType findActionType(String[] messageSplits) {
         if(messageSplits.length != 3) {
-            return false;
+            return null;
         }
 
-        if(!"subscribe".equals(messageSplits[1].toLowerCase())) {
-            return false;
+        if(!validUrl(messageSplits[2])) {
+            return null;
         }
 
-        return validUrl(messageSplits[2]);
+        switch (messageSplits[1].toLowerCase()) {
+            case "subscribe":
+                return ActionType.Subscribe;
+            case "unsubscribe":
+                return ActionType.Unsubscribe;
+            default:
+                return null;
+        }
     }
 
     private boolean validUrl(String messageSplit) {
