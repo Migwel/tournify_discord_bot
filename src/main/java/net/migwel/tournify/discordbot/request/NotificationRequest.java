@@ -1,25 +1,23 @@
 package net.migwel.tournify.discordbot.request;
 
-import net.migwel.tournify.discordbot.data.SetUpdate;
-
-import java.util.List;
+import net.migwel.tournify.discordbot.data.Updates;
 
 public class NotificationRequest {
 
-    private List<SetUpdate> setUpdates;
+    private Updates updates;
 
     public NotificationRequest() {
     }
 
-    public NotificationRequest(List<SetUpdate> setUpdates) {
-        this.setUpdates = setUpdates;
+    public NotificationRequest(Updates updates) {
+        this.updates = updates;
     }
 
-    public List<SetUpdate> getSetUpdates() {
-        return setUpdates;
+    public Updates getUpdates() {
+        return updates;
     }
 
-    public void setSetUpdates(List<SetUpdate> setUpdates) {
-        this.setUpdates = setUpdates;
+    public void setUpdates(Updates updates) {
+        this.updates = updates;
     }
 }

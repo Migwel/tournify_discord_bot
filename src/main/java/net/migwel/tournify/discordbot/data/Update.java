@@ -3,14 +3,14 @@ package net.migwel.tournify.discordbot.data;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties
-public class SetUpdate {
+public class Update {
 
     private String description;
 
-    public SetUpdate() {
+    public Update() {
     }
 
-    public SetUpdate(String description) {
+    public Update(String description) {
         this.description = description;
     }
 
@@ -24,7 +24,7 @@ public class SetUpdate {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("SetUpdate{");
+        final StringBuilder sb = new StringBuilder("Update{");
         sb.append(", description='").append(description).append('\'');
         sb.append('}');
         return sb.toString();
