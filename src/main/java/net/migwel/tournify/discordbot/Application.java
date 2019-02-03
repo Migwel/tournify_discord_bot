@@ -1,6 +1,6 @@
 package net.migwel.tournify.discordbot;
 
-import net.migwel.tournify.discordbot.listener.SubscriptionListener;
+import net.migwel.tournify.discordbot.listener.AbstractListener;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.springframework.boot.SpringApplication;
@@ -24,10 +24,10 @@ public class Application {
     }
 
     @Bean
-    DiscordApi discordApi(DiscordProperties properties, SubscriptionListener subscriptionListener) {
+    DiscordApi discordApi(DiscordProperties properties, AbstractListener abstractListener) {
         String token = properties.getToken();
         DiscordApi discordApi = new DiscordApiBuilder().setToken(token).login().join();
-        discordApi.addMessageCreateListener(subscriptionListener);
+        discordApi.addMessageCreateListener(abstractListener);
         return discordApi;
     }
 }
