@@ -17,8 +17,8 @@ public class SubscriptionService {
 
     private static final Logger log = LoggerFactory.getLogger(SubscriptionService.class);
 
-    private static final String localUrl = "https://tournifydiscord.migwel.dev"; //TODO: Put this in properties
-    private static final String remoteUrl = "https://tournify.migwel.dev/subscribe"; //TODO: Put this in properties
+    private static final String localUrl = "https://polar-river-52151.herokuapp.com"; //TODO: Put this in properties
+    private static final String remoteUrl = "https://vast-cove-59499.herokuapp.com/subscribe"; //TODO: Put this in properties
 
     @Autowired
     private RestTemplate restTemplate;
