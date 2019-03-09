@@ -16,7 +16,7 @@ public class TournamentService {
 
     private static final Logger log = LoggerFactory.getLogger(TournamentService.class);
 
-    private static final String remoteUrl = "http://localhost:8090/tournament"; //TODO: Put this in properties
+    private static final String remoteUrl = "https://vast-cove-59499.herokuapp.com/tournament"; //TODO: Put this in properties
     private static final String participantsUrl = remoteUrl + "/participants";
 
 
