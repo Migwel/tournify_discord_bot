@@ -1,6 +1,5 @@
 package net.migwel.tournify.discordbot.service;
 
-import net.migwel.tournify.discordbot.data.Participant;
 import net.migwel.tournify.discordbot.request.ParticipantsRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +24,10 @@ public class TournamentService {
     private RestTemplate restTemplate;
 
     @Nonnull
-    public List<Participant> getParticipants(String tournamentUrl) {
+    public List<String> getParticipants(String tournamentUrl) {
         ParticipantsRequest participantsRequest = new ParticipantsRequest(tournamentUrl);
         log.info("Getting participants for "+ tournamentUrl);
-        List<Participant> participants = (List<Participant>)restTemplate.postForEntity(participantsUrl, participantsRequest, List.class).getBody();
+        List<String> participants = (List<String>)restTemplate.postForEntity(participantsUrl, participantsRequest, List.class).getBody();
         return participants == null ? Collections.emptyList() : participants;
     }
 }

@@ -1,6 +1,5 @@
 package net.migwel.tournify.discordbot.listener;
 
-import net.migwel.tournify.discordbot.data.Participant;
 import net.migwel.tournify.discordbot.service.TournamentService;
 import org.javacord.api.entity.channel.TextChannel;
 import org.slf4j.Logger;
@@ -28,13 +27,11 @@ public class TournamentListener {
     }
 
     public void action(TextChannel channel, String url) {
-        List<Participant> participants = tournamentService.getParticipants(url);
+        List<String> participants = tournamentService.getParticipants(url);
         writeParticipants(channel, participants);
     }
 
-    private void writeParticipants(TextChannel channel, @Nonnull List<Participant> participants) {
-        StringBuilder participantsStr = new StringBuilder("List of participants: ");
-        participants.forEach(e -> participantsStr.append(e.getGamerTag()));
-        channel.sendMessage(participantsStr.toString());
+    private void writeParticipants(TextChannel channel, @Nonnull List<String> participants) {
+        channel.sendMessage("List of participants: \n" + String.join(",  ", participants));
     }
 }

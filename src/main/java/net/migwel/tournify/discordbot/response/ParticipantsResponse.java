@@ -1,18 +1,18 @@
 package net.migwel.tournify.discordbot.response;
 
-import net.migwel.tournify.discordbot.data.Participant;
+import net.migwel.tournify.discordbot.data.Player;
 
 import java.util.List;
 
 public class ParticipantsResponse {
 
-    List<Participant> participants;
+    List<Player> participants;
 
-    public List<Participant> getParticipants() {
+    public List<Player> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(List<Participant> participants) {
+    public void setParticipants(List<Player> participants) {
         this.participants = participants;
     }
 }
