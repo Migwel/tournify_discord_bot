@@ -16,13 +16,13 @@ public class SubscriptionListener {
         this.subscriptionService = subscriptionService;
     }
 
-    public void action(AbstractListener.ActionType actionType, long channelId, String url) {
+    public void action(AbstractListener.ActionType actionType, long channelId, String url, String playerTag) {
         switch (actionType) {
             case Subscribe:
-                subscriptionService.addSubscription(channelId, url);
+                subscriptionService.addSubscription(channelId, url, playerTag);
                 break;
             case Unsubscribe:
-                subscriptionService.deleteSubscription(channelId, url);
+                subscriptionService.deleteSubscription(channelId, url, playerTag);
                 break;
         }
     }

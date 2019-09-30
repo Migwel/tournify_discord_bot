@@ -22,7 +22,7 @@ public class TournamentListener {
 
     private String usage() {
         return "Usage: \n" +
-                "@mention subscribe [event URL] \n" +
+                "@mention participants [event URL] \n" +
                 "Example: @TournifyBot participants https://smash.gg/tournament/genesis-3/events/melee-singles \n";
     }
 

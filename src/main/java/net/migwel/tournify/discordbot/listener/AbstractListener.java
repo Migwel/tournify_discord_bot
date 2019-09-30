@@ -62,7 +62,11 @@ public class AbstractListener implements MessageCreateListener {
         switch (actionType) {
             case Subscribe:
             case Unsubscribe:
-                subscriptionListener.action(actionType, event.getChannel().getId(), messageSplits[2]);
+                String playerTag = null;
+                if (messageSplits.length > 3) {
+                    playerTag = messageSplits[3];
+                }
+                subscriptionListener.action(actionType, event.getChannel().getId(), messageSplits[2], playerTag);
                 break;
             case Participants:
                 tournamentListener.action(event.getChannel(), messageSplits[2]);
@@ -71,7 +75,7 @@ public class AbstractListener implements MessageCreateListener {
     }
 
     private ActionType findActionType(String[] messageSplits) {
-        if(messageSplits.length != 3) {
+        if(messageSplits.length < 3) {
             return null;
         }
 
