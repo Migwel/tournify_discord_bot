@@ -19,16 +19,13 @@ public class Subscription {
 
     private long channelId;
 
-    private String playerTag;
-
     public Subscription() {
     }
 
-    public Subscription(UUID id, String tournamentUrl, long channelId, String playerTag) {
+    public Subscription(UUID id, String tournamentUrl, long channelId) {
         this.id = id;
         this.tournamentUrl = tournamentUrl;
         this.channelId = channelId;
-        this.playerTag = playerTag;
     }
 
     public UUID getId() {
@@ -49,14 +46,6 @@ public class Subscription {
 
     public void setChannelId(long channelId) {
         this.channelId = channelId;
-    }
-
-    public String getPlayerTag() {
-        return playerTag;
-    }
-
-    public void setPlayerTag(String playerTag) {
-        this.playerTag = playerTag;
     }
 
     @Override

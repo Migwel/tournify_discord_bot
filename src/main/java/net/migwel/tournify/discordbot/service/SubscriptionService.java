@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.UUID;
 
 @Service
@@ -30,16 +31,23 @@ public class SubscriptionService {
     public void addSubscription(long channelId, String tournamentUrl, @Nullable String playerTag) {
 
         String callBackUrl = localUrl +"/notification/"+ channelId;
-        SubscriptionRequest subscriptionRequest = new SubscriptionRequest(tournamentUrl, callBackUrl);
+        SubscriptionRequest subscriptionRequest = new SubscriptionRequest(tournamentUrl,
+                callBackUrl,
+                playerTag == null ? Collections.emptyList() : Collections.singletonList(playerTag));
         log.info("Subscribing to "+ tournamentUrl);
         SubscriptionResponse response = restTemplate.postForEntity(remoteUrl, subscriptionRequest, SubscriptionResponse.class).getBody();
 
-        Subscription subscription = new Subscription(UUID.fromString(response.getId()), tournamentUrl, channelId, playerTag);
+        Subscription subscription = subscriptionRepository.findByTournamentUrlAndChannelId(tournamentUrl, channelId);
+        if(subscription != null) {
+            return;
+        }
+
+        subscription = new Subscription(UUID.fromString(response.getId()), tournamentUrl, channelId);
         subscriptionRepository.save(subscription);
     }
 
-    public void deleteSubscription(long channelId, String tournamentUrl, @Nullable String playerTag) {
-        Subscription subscription = subscriptionRepository.findByTournamentUrlAndChannelIdAndPlayerTag(tournamentUrl, channelId, playerTag);
+    public void deleteSubscription(long channelId, String tournamentUrl) {
+        Subscription subscription = subscriptionRepository.findByTournamentUrlAndChannelId(tournamentUrl, channelId);
         if(subscription == null) {
             return;
         }

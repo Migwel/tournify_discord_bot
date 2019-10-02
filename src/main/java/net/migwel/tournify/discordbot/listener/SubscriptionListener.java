@@ -22,7 +22,7 @@ public class SubscriptionListener {
                 subscriptionService.addSubscription(channelId, url, playerTag);
                 break;
             case Unsubscribe:
-                subscriptionService.deleteSubscription(channelId, url, playerTag);
+                subscriptionService.deleteSubscription(channelId, url);
                 break;
         }
     }
