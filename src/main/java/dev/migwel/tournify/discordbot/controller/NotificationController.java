@@ -1,10 +1,10 @@
-package net.migwel.tournify.discordbot.controller;
+package dev.migwel.tournify.discordbot.controller;
 
-import net.migwel.tournify.communication.commons.Update;
-import net.migwel.tournify.communication.request.NotificationRequest;
-import net.migwel.tournify.communication.response.NotificationResponse;
-import net.migwel.tournify.discordbot.data.Subscription;
-import net.migwel.tournify.discordbot.store.SubscriptionRepository;
+import dev.migwel.tournify.communication.commons.Update;
+import dev.migwel.tournify.communication.request.NotificationRequest;
+import dev.migwel.tournify.communication.response.NotificationResponse;
+import dev.migwel.tournify.discordbot.data.Subscription;
+import dev.migwel.tournify.discordbot.store.SubscriptionRepository;
 import org.javacord.api.DiscordApi;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

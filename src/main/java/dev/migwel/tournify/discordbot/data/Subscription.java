@@ -1,4 +1,4 @@
-package net.migwel.tournify.discordbot.data;
+package dev.migwel.tournify.discordbot.data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

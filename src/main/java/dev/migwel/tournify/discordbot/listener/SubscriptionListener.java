@@ -1,6 +1,6 @@
-package net.migwel.tournify.discordbot.listener;
+package dev.migwel.tournify.discordbot.listener;
 
-import net.migwel.tournify.discordbot.service.SubscriptionService;
+import dev.migwel.tournify.discordbot.service.SubscriptionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

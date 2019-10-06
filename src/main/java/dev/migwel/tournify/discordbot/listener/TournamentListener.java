@@ -1,6 +1,6 @@
-package net.migwel.tournify.discordbot.listener;
+package dev.migwel.tournify.discordbot.listener;
 
-import net.migwel.tournify.discordbot.service.TournamentService;
+import dev.migwel.tournify.discordbot.service.TournamentService;
 import org.javacord.api.entity.channel.TextChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

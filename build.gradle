@@ -1,4 +1,4 @@
-group 'net.migwel.tournify-discord'
+group 'dev.migwel.tournify-discord'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -45,11 +45,11 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.0'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
     compile 'org.javacord:javacord:3.0.0'
-    compile 'net.migwel.tournify:communication:1.0-SNAPSHOT'
+    compile 'dev.migwel.tournify:communication:1.0-SNAPSHOT'
 }
 
 springBoot {
-    mainClass = 'net.migwel.tournify.discordbot.Application'
+    mainClass = 'dev.migwel.tournify.discordbot.Application'
 }
 
 applicationDefaultJvmArgs = [

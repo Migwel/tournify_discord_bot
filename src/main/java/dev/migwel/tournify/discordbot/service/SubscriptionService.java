@@ -1,9 +1,9 @@
-package net.migwel.tournify.discordbot.service;
+package dev.migwel.tournify.discordbot.service;
 
-import net.migwel.tournify.communication.request.SubscriptionRequest;
-import net.migwel.tournify.communication.response.SubscriptionResponse;
-import net.migwel.tournify.discordbot.data.Subscription;
-import net.migwel.tournify.discordbot.store.SubscriptionRepository;
+import dev.migwel.tournify.communication.request.SubscriptionRequest;
+import dev.migwel.tournify.communication.response.SubscriptionResponse;
+import dev.migwel.tournify.discordbot.data.Subscription;
+import dev.migwel.tournify.discordbot.store.SubscriptionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

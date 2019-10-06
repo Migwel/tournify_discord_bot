@@ -1,6 +1,6 @@
-package net.migwel.tournify.discordbot.listener;
+package dev.migwel.tournify.discordbot.listener;
 
-import net.migwel.tournify.discordbot.DiscordProperties;
+import dev.migwel.tournify.discordbot.DiscordProperties;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
