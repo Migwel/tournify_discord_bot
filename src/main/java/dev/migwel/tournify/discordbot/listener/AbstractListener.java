@@ -46,7 +46,7 @@ public class AbstractListener implements MessageCreateListener {
             return;
         }
 
-        String message = event.getMessage().getContent();
+        String message = event.getMessageContent();
         if(message == null || message.isEmpty()) {
             event.getChannel().sendMessage(usage());
             return;
@@ -64,7 +64,7 @@ public class AbstractListener implements MessageCreateListener {
             case Unsubscribe:
                 String playerTag = null;
                 if (messageSplits.length > 3) {
-                    playerTag = messageSplits[3];
+                    playerTag = buildPlayerTag(messageSplits);
                 }
                 subscriptionListener.action(actionType, event.getChannel().getId(), messageSplits[2], playerTag);
                 break;
@@ -72,6 +72,14 @@ public class AbstractListener implements MessageCreateListener {
                 tournamentListener.action(event.getChannel(), messageSplits[2]);
         }
 
+    }
+
+    private String buildPlayerTag(String[] messageSplits) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 3; i < messageSplits.length; i++) {
+            sb.append(messageSplits[i]).append(" ");
+        }
+        return sb.substring(0, sb.length() - 1);
     }
 
     private ActionType findActionType(String[] messageSplits) {
