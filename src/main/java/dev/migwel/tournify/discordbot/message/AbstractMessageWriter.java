@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
 
 public abstract class AbstractMessageWriter implements MessageWriter {
 
-    private static final Logger log = LoggerFactory.getLogger(ParticipantsMessageWriter.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractMessageWriter.class);
 
     private TextChannel channel;
     private static final int MAX_LENGTH = 2000;
@@ -37,7 +37,7 @@ public abstract class AbstractMessageWriter implements MessageWriter {
     private List<String> cutMessage(String message) {
         List<String> messageParts = new ArrayList<>();
         for(int i = 0; i < message.length(); i += MAX_LENGTH) {
-            messageParts.add(message.substring(i, Math.min(MAX_LENGTH, message.length())));
+            messageParts.add(message.substring(i, Math.min(i+MAX_LENGTH, message.length())));
         }
 
         return messageParts;
