@@ -3,8 +3,8 @@ package dev.migwel.tournify.discordbot.controller;
 import dev.migwel.tournify.communication.commons.Update;
 import dev.migwel.tournify.communication.request.NotificationRequest;
 import dev.migwel.tournify.communication.response.NotificationResponse;
-import dev.migwel.tournify.discordbot.message.GenericMessage;
-import dev.migwel.tournify.discordbot.message.Message;
+import dev.migwel.tournify.discordbot.message.GenericMessageWriter;
+import dev.migwel.tournify.discordbot.message.MessageWriter;
 import dev.migwel.tournify.discordbot.store.SubscriptionRepository;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
@@ -41,15 +41,15 @@ public class NotificationController {
 
     private void writeNotification(@PathVariable String channelId, Update update) {
         TextChannel channel = findChannel(channelId);
-        Message message = buildMessage(update, channel);
-        message.write();
+        MessageWriter messageWriter = buildMessage(update, channel);
+        messageWriter.write();
     }
 
-    private Message buildMessage(Update update, TextChannel channel) {
+    private MessageWriter buildMessage(Update update, TextChannel channel) {
         if (update.getSet() == null) {
-            return new GenericMessage(channel, update.getDescription()); //TODO: Use SetUpdateMessage
+            return new GenericMessageWriter(channel, update.getDescription()); //TODO: Use SetUpdateMessageWriter
         }
-        return new GenericMessage(channel, update.getDescription());
+        return new GenericMessageWriter(channel, update.getDescription());
     }
 
     @CheckForNull

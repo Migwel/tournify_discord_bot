@@ -1,6 +1,6 @@
 package dev.migwel.tournify.discordbot.listener;
 
-import dev.migwel.tournify.discordbot.message.ParticipantsMessage;
+import dev.migwel.tournify.discordbot.message.ParticipantsMessageWriter;
 import dev.migwel.tournify.discordbot.service.TournamentService;
 import org.javacord.api.entity.channel.TextChannel;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class TournamentListener {
     }
 
     private void writeParticipants(TextChannel channel, @Nonnull List<String> participants) {
-        ParticipantsMessage message = new ParticipantsMessage(channel, participants);
+        ParticipantsMessageWriter message = new ParticipantsMessageWriter(channel, participants);
         message.write();
     }
 }
