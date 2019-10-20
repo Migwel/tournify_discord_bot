@@ -1,15 +1,13 @@
 package dev.migwel.tournify.discordbot.service;
 
 import dev.migwel.tournify.communication.request.TournamentRequest;
+import dev.migwel.tournify.communication.response.ParticipantsResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
-import java.util.List;
 
 @Service
 public class TournamentService {
@@ -19,15 +17,17 @@ public class TournamentService {
     private static final String remoteUrl = "http://migwel.dev:8090/tournament"; //TODO: Put this in properties
     private static final String participantsUrl = remoteUrl + "/participants";
 
-
-    @Autowired
     private RestTemplate restTemplate;
 
+    public TournamentService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     @Nonnull
-    public List<String> getParticipants(String tournamentUrl) {
+    public ParticipantsResponse getParticipants(String tournamentUrl) {
         TournamentRequest participantsRequest = new TournamentRequest(tournamentUrl);
         log.info("Getting participants for "+ tournamentUrl);
-        List<String> participants = (List<String>)restTemplate.postForEntity(participantsUrl, participantsRequest, List.class).getBody();
-        return participants == null ? Collections.emptyList() : participants;
+        ParticipantsResponse participantsResponse = restTemplate.postForEntity(participantsUrl, participantsRequest, ParticipantsResponse.class).getBody();
+        return participantsResponse;
     }
 }

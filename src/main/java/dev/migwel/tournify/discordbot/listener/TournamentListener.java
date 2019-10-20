@@ -1,24 +1,21 @@
 package dev.migwel.tournify.discordbot.listener;
 
-import dev.migwel.tournify.discordbot.messagewriter.ParticipantsMessageWriter;
+import dev.migwel.tournify.communication.response.ParticipantsResponse;
+import dev.migwel.tournify.discordbot.messagewriter.MessageWriter;
+import dev.migwel.tournify.discordbot.messagewriter.MessageWriterFactory;
 import dev.migwel.tournify.discordbot.service.TournamentService;
 import org.javacord.api.entity.channel.TextChannel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Nonnull;
-import java.util.List;
 
 @Component
 public class TournamentListener {
 
-    private static final Logger log = LoggerFactory.getLogger(TournamentListener.class);
-
     private TournamentService tournamentService;
+    private MessageWriterFactory messageWriterFactory;
 
-    public TournamentListener(TournamentService tournamentService) {
+    public TournamentListener(TournamentService tournamentService, MessageWriterFactory messageWriterFactory) {
         this.tournamentService = tournamentService;
+        this.messageWriterFactory = messageWriterFactory;
     }
 
     private String usage() {
@@ -28,12 +25,12 @@ public class TournamentListener {
     }
 
     public void action(TextChannel channel, String url) {
-        List<String> participants = tournamentService.getParticipants(url);
-        writeParticipants(channel, participants);
+        ParticipantsResponse participantsResponse = tournamentService.getParticipants(url);
+        writeParticipants(channel, participantsResponse);
     }
 
-    private void writeParticipants(TextChannel channel, @Nonnull List<String> participants) {
-        ParticipantsMessageWriter message = new ParticipantsMessageWriter(channel, participants);
-        message.write();
+    private void writeParticipants(TextChannel channel, ParticipantsResponse participantsResponse) {
+        MessageWriter messageWriter = messageWriterFactory.getMessageWriter(channel, participantsResponse);
+        messageWriter.write();
     }
 }
