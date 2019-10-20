@@ -1,4 +1,4 @@
-package dev.migwel.tournify.discordbot.message;
+package dev.migwel.tournify.discordbot.messagewriter;
 
 import dev.migwel.tournify.communication.commons.Set;
 import org.javacord.api.entity.channel.TextChannel;

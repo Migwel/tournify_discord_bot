@@ -3,9 +3,8 @@ package dev.migwel.tournify.discordbot.controller;
 import dev.migwel.tournify.communication.commons.Update;
 import dev.migwel.tournify.communication.request.NotificationRequest;
 import dev.migwel.tournify.communication.response.NotificationResponse;
-import dev.migwel.tournify.discordbot.message.GenericMessageWriter;
-import dev.migwel.tournify.discordbot.message.MessageWriter;
-import dev.migwel.tournify.discordbot.store.SubscriptionRepository;
+import dev.migwel.tournify.discordbot.messagewriter.MessageWriter;
+import dev.migwel.tournify.discordbot.messagewriter.MessageWriterFactory;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,17 +21,16 @@ public class NotificationController {
 
     private DiscordApi discordApi;
 
-    private SubscriptionRepository subscriptionRepository;
+    private MessageWriterFactory messageWriterFactory;
 
-    public NotificationController(DiscordApi discordApi, SubscriptionRepository subscriptionRepository) {
+    public NotificationController(DiscordApi discordApi, MessageWriterFactory messageWriterFactory) {
         this.discordApi = discordApi;
-        this.subscriptionRepository = subscriptionRepository;
+        this.messageWriterFactory = messageWriterFactory;
     }
 
     @RequestMapping(value = "/{channelId}", method = RequestMethod.POST)
     public NotificationResponse postNotification(@RequestBody NotificationRequest request, @PathVariable String channelId) {
         Update update = request.getUpdate();
-//        Subscription subscription = subscriptionRepository.findByChannelId(Long.valueOf(channelId));
         writeNotification(channelId, update);
         NotificationResponse response = new NotificationResponse();
         response.setStatus("accepted");
@@ -41,15 +39,8 @@ public class NotificationController {
 
     private void writeNotification(@PathVariable String channelId, Update update) {
         TextChannel channel = findChannel(channelId);
-        MessageWriter messageWriter = buildMessage(update, channel);
+        MessageWriter messageWriter = messageWriterFactory.getMessageWriter(channel, update);
         messageWriter.write();
-    }
-
-    private MessageWriter buildMessage(Update update, TextChannel channel) {
-        if (update.getSet() == null) {
-            return new GenericMessageWriter(channel, update.getDescription()); //TODO: Use SetUpdateMessageWriter
-        }
-        return new GenericMessageWriter(channel, update.getDescription());
     }
 
     @CheckForNull

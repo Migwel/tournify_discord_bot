@@ -1,4 +1,4 @@
-package dev.migwel.tournify.discordbot.message;
+package dev.migwel.tournify.discordbot.messagewriter;
 
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
@@ -48,7 +48,7 @@ public abstract class AbstractMessageWriter implements MessageWriter {
         try {
             futureSuccessMessage.get(1, TimeUnit.MINUTES);
         } catch (InterruptedException | TimeoutException | ExecutionException e) {
-            log.warn("Could not get success message", e);
+            log.warn("Could not get success messagewriter", e);
         }
     }
 }
