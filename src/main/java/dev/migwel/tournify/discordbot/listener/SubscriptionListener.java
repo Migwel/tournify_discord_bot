@@ -1,5 +1,6 @@
 package dev.migwel.tournify.discordbot.listener;
 
+import dev.migwel.tournify.discordbot.ServerException;
 import dev.migwel.tournify.discordbot.messagewriter.MessageWriter;
 import dev.migwel.tournify.discordbot.messagewriter.MessageWriterFactory;
 import dev.migwel.tournify.discordbot.service.SubscriptionService;
@@ -24,21 +25,44 @@ public class SubscriptionListener {
     }
 
     public void action(AbstractListener.ActionType actionType, Channel channel, String url, String playerTag) {
-        String message = null;
         switch (actionType) {
             case Subscribe:
-                subscriptionService.addSubscription(channel.getId(), url, playerTag);
-                message = subscribeMessage(url, playerTag);
+                subscribe(channel, url, playerTag);
                 break;
             case Unsubscribe:
-                subscriptionService.deleteSubscription(channel.getId(), url);
-                message = unsubscribeMessage(url, playerTag);
+                unsubscribe(channel, url, playerTag);
                 break;
         }
+    }
 
+    private void writeMessage(Channel channel, String message) {
         TextChannel textChannel = channel.asTextChannel().orElseThrow(() -> new IllegalArgumentException("Wrong channel"));
         MessageWriter messageWriter = messageWriterFactory.getMessageWriter(textChannel, message);
         messageWriter.write();
+    }
+
+    private void unsubscribe(Channel channel, String url, String playerTag) {
+        String message;
+        try {
+            subscriptionService.deleteSubscription(channel.getId(), url);
+        } catch (ServerException e) {
+            writeMessage(channel, e.getMessage());
+            return;
+        }
+        message = unsubscribeMessage(url, playerTag);
+        writeMessage(channel, message);
+    }
+
+    private void subscribe(Channel channel, String url, String playerTag) {
+        String message;
+        try {
+            subscriptionService.addSubscription(channel.getId(), url, playerTag);
+        } catch (ServerException e) {
+            writeMessage(channel, e.getMessage());
+            return;
+        }
+        message = subscribeMessage(url, playerTag);
+        writeMessage(channel, message);
     }
 
     private String subscribeMessage(String url, String playerTag) {
