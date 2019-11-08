@@ -21,8 +21,8 @@ public class MessageWriterFactory {
     }
 
     private MessageWriter getUpdateMessageWriter(TextChannel channel, Update update) {
-        if (update.getSet() == null) {
-            return new GenericMessageWriter(channel, update.getDescription()); //TODO: Use SetUpdateMessageWriter
+        if (update.getSet() != null) {
+            return new SetUpdateMessageWriter(channel, update.getSet());
         }
         return new GenericMessageWriter(channel, update.getDescription());
     }
