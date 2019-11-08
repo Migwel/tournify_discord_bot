@@ -66,7 +66,7 @@ public class AbstractListener implements MessageCreateListener {
                 if (messageSplits.length > 3) {
                     playerTag = buildPlayerTag(messageSplits);
                 }
-                subscriptionListener.action(actionType, event.getChannel().getId(), messageSplits[2], playerTag);
+                subscriptionListener.action(actionType, event.getChannel(), messageSplits[2], playerTag);
                 break;
             case Participants:
                 tournamentListener.action(event.getChannel(), messageSplits[2]);

@@ -17,6 +17,10 @@ public class MessageWriterFactory {
             return new ParticipantsMessageWriter(channel, ((ParticipantsResponse)messageContainer).getParticipants());
         }
 
+        if(messageContainer instanceof String) {
+            return new GenericMessageWriter(channel, (String) messageContainer);
+        }
+
         throw new IllegalArgumentException("Wrong message container type: "+ messageContainer.getClass());
     }
 
