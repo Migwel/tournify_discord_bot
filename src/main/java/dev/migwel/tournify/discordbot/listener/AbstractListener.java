@@ -36,8 +36,12 @@ public class AbstractListener implements MessageCreateListener {
 
     private String usage() {
         return "Usage: \n" +
-                "@mention subscribe [event URL] \n" +
-                "Example: @TournifyBot subscribe https://smash.gg/tournament/genesis-3/events/melee-singles \n";
+                "To subscribe: @mention subscribe [event URL] \n" +
+                "Example: @TournifyBot subscribe https://smash.gg/tournament/genesis-3/events/melee-singles \n \n" +
+                "To unsubscribe: @mention unsubscribe [event URL] \n" +
+                "Example: @TournifyBot unsubscribe https://smash.gg/tournament/genesis-3/events/melee-singles \n \n" +
+                "To get a list of participants: @mention participants [event URL] \n" +
+                "Example: @TournifyBot participants https://smash.gg/tournament/genesis-3/events/melee-singles \n \n";
     }
 
     @Override
