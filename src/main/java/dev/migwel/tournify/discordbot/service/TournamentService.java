@@ -31,6 +31,6 @@ public class TournamentService {
     }
 
     private String buildParticipantsUrl() {
-        return tournifyProperties.getTournifyUrl() + "/participants";
+        return tournifyProperties.getTournifyUrl() + "/tournament/participants";
     }
 }
