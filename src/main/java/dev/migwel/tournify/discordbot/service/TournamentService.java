@@ -2,6 +2,7 @@ package dev.migwel.tournify.discordbot.service;
 
 import dev.migwel.tournify.communication.request.TournamentRequest;
 import dev.migwel.tournify.communication.response.ParticipantsResponse;
+import dev.migwel.tournify.discordbot.properties.TournifyProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,20 +15,22 @@ public class TournamentService {
 
     private static final Logger log = LoggerFactory.getLogger(TournamentService.class);
 
-    private static final String remoteUrl = "http://migwel.dev:8090/tournament"; //TODO: Put this in properties
-    private static final String participantsUrl = remoteUrl + "/participants";
-
     private RestTemplate restTemplate;
+    private TournifyProperties tournifyProperties;
 
-    public TournamentService(RestTemplate restTemplate) {
+    public TournamentService(RestTemplate restTemplate, TournifyProperties tournifyProperties) {
         this.restTemplate = restTemplate;
+        this.tournifyProperties = tournifyProperties;
     }
 
     @Nonnull
     public ParticipantsResponse getParticipants(String tournamentUrl) {
         TournamentRequest participantsRequest = new TournamentRequest(tournamentUrl);
         log.info("Getting participants for "+ tournamentUrl);
-        ParticipantsResponse participantsResponse = restTemplate.postForEntity(participantsUrl, participantsRequest, ParticipantsResponse.class).getBody();
-        return participantsResponse;
+        return restTemplate.postForEntity(buildParticipantsUrl(), participantsRequest, ParticipantsResponse.class).getBody();
+    }
+
+    private String buildParticipantsUrl() {
+        return tournifyProperties.getTournifyUrl() + "/participants";
     }
 }

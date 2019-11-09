@@ -1,4 +1,4 @@
-package dev.migwel.tournify.discordbot;
+package dev.migwel.tournify.discordbot.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

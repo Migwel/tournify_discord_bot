@@ -1,6 +1,7 @@
 package dev.migwel.tournify.discordbot;
 
 import dev.migwel.tournify.discordbot.listener.AbstractListener;
+import dev.migwel.tournify.discordbot.properties.DiscordProperties;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.springframework.boot.SpringApplication;
