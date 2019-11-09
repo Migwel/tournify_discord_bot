@@ -35,7 +35,6 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-data-rest'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -46,6 +45,10 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
     compile 'org.javacord:javacord:3.0.4'
     compile 'dev.migwel.tournify:communication:1.0-SNAPSHOT'
+
+    testCompile "org.mockito:mockito-core:2.+"
+    testCompile('org.mockito:mockito-junit-jupiter:2.18.3')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 springBoot {
