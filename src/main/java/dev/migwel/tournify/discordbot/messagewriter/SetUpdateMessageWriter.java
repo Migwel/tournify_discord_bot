@@ -26,6 +26,6 @@ public class SetUpdateMessageWriter extends AbstractMessageWriter {
                 "] - " +
                 set.getPlayers().stream().map(Player::getDisplayUsername).collect(Collectors.joining(" vs ")) +
                 " - Winner is " +
-                set.getWinner().getDisplayUsername();
+                set.getWinners().stream().map(Player::getDisplayUsername).collect(Collectors.joining(" vs "));
     }
 }
