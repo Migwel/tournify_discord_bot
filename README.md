@@ -14,6 +14,12 @@ The commands endpoints are available:
 * `@TournifyBot subscribe tournamentUrl (player)` This command asks the bot to follow the tournament. As soon as a result is published, the bot will post it in your Discord group. If you are only interested in the results of a specific player, you can also specify it in the command. At the moment, the only way to follow multiple players is to execute the same command multiple time, changing the `(player)`. I'm planning on allowing to provide a list of players but it's not implemented yet
 * `@TournifyBot participants tournamentUrl` The bot will return the list of participants at a tournament in format `prefix username`.
 
+# Examples
+* `@TournifyBot subscribe https://smash.gg/tournament/genesis-6/events/melee-singles/overview` The bot will post all results related to Genesis 6 Melee Singles, for all players
+* `@TournifyBot participants https://smash.gg/tournament/genesis-6/events/melee-singles/overview` The bot returns all players participants at Genesis 6 Melee Singles
+* `@TournifyBot subscribe https://smash.gg/tournament/genesis-6/events/melee-singles/overview C9 Mango` The post will post results related to Genesis 6 Melee Singles for C9 Mango
+ 
+
 # Supported Tournament Hosts
 Currently, the following tournament hosts are supported:
 * [smash.gg](https://smash.gg/)
