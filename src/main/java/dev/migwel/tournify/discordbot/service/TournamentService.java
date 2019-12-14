@@ -1,6 +1,5 @@
 package dev.migwel.tournify.discordbot.service;
 
-import dev.migwel.tournify.communication.request.TournamentRequest;
 import dev.migwel.tournify.communication.response.ParticipantsResponse;
 import dev.migwel.tournify.discordbot.ServerException;
 import dev.migwel.tournify.discordbot.properties.TournifyProperties;
@@ -27,10 +26,9 @@ public class TournamentService {
 
     @Nonnull
     public ParticipantsResponse getParticipants(String tournamentUrl) throws ServerException {
-        TournamentRequest participantsRequest = new TournamentRequest(tournamentUrl);
         log.info("Getting participants for "+ tournamentUrl);
         try {
-            return restTemplate.postForEntity(buildParticipantsUrl(), participantsRequest, ParticipantsResponse.class).getBody();
+            return restTemplate.getForEntity(buildParticipantsUrl(tournamentUrl), ParticipantsResponse.class).getBody();
         }
         catch (RestClientException e) {
             log.warn("Something went wrong while calling the server", e);
@@ -38,7 +36,7 @@ public class TournamentService {
         }
     }
 
-    private String buildParticipantsUrl() {
-        return tournifyProperties.getTournifyUrl() + "/tournament/participants";
+    private String buildParticipantsUrl(String tournamentUrl) {
+        return tournifyProperties.getTournifyUrl() + "/tournament/participants?url=" + tournamentUrl;
     }
 }
