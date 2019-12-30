@@ -5,7 +5,7 @@ Tournify-Bot is still under heavy development and is currently in an alpha phase
 In short, Tournify is a service aimed at unifying API from different tournament providers and keep users updated about games played as soon as they're over.
 To learn more about Tournify, check https://github.com/Migwel/Tournify.
 
-# # What is Tournify Discord Bot?
+# What is Tournify Discord Bot?
 It's a Discord bot that works with Tournify. For example, you can ask the bot to subscribe to a specific tournament and it will post all results from that tournament into your discord group. That way, if some games are played offstream or if you cannot watch it, you can still be notified of the results as soon as they're published.
 
 # Commands
@@ -23,6 +23,7 @@ The commands endpoints are available:
 # Supported Tournament Hosts
 Currently, the following tournament hosts are supported:
 * [smash.gg](https://smash.gg/)
+* [challonge.com](https://challonge.com)
 
 # How to invite Tournify Discord Bot
 To invite the bot to your group, follow the following link: https://discordapp.com/oauth2/authorize?&client_id=221323100476801024&scope=bot&permissions=0
