@@ -46,7 +46,7 @@ public class NotificationController {
     @CheckForNull
     private TextChannel findChannel(String channelId) {
         return discordApi
-                .getChannelById(Long.parseLong(channelId)).orElseThrow(IllegalArgumentException::new)
+                .getChannelById(Long.parseLong(channelId)).orElseThrow(() -> new IllegalArgumentException("Channel cannot be found"+ channelId))
                 .asServerTextChannel().orElse(null);
     }
 
