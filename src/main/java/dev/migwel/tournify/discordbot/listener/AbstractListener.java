@@ -41,7 +41,8 @@ public class AbstractListener implements MessageCreateListener {
                 "To unsubscribe: @mention unsubscribe [event URL] \n" +
                 "Example: @TournifyBot unsubscribe https://smash.gg/tournament/genesis-3/events/melee-singles \n \n" +
                 "To get a list of participants: @mention participants [event URL] \n" +
-                "Example: @TournifyBot participants https://smash.gg/tournament/genesis-3/events/melee-singles \n \n";
+                "Example: @TournifyBot participants https://smash.gg/tournament/genesis-3/events/melee-singles \n \n" +
+                "If you have further questions or suggestions, join the Discord channel at https://discord.gg/D6GvMuR";
     }
 
     @Override
