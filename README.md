@@ -27,3 +27,6 @@ Currently, the following tournament hosts are supported:
 
 # How to invite Tournify Discord Bot
 To invite the bot to your group, follow the following link: https://discordapp.com/oauth2/authorize?&client_id=221323100476801024&scope=bot&permissions=0
+
+# Getting in touch
+If you have questions or suggestions, feel free to join the discord channel using [this link](https://discord.gg/D6GvMuR)
