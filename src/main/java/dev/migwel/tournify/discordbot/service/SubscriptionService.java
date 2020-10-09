@@ -67,6 +67,7 @@ public class SubscriptionService {
     public void deleteSubscription(long channelId, String tournamentUrl) throws ServerException {
         Subscription subscription = subscriptionRepository.findByTournamentUrlAndChannelId(tournamentUrl, channelId);
         if(subscription == null) {
+            log.info("Trying to delete a subscription that doesn't exist. channelId: "+ channelId +" - tournamentUrl: "+ tournamentUrl);
             return;
         }
         String id = subscription.getId().toString();
