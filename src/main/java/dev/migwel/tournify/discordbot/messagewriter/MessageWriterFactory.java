@@ -1,5 +1,6 @@
 package dev.migwel.tournify.discordbot.messagewriter;
 
+import dev.migwel.tournify.communication.commons.SetUpdate;
 import dev.migwel.tournify.communication.commons.Update;
 import dev.migwel.tournify.communication.response.ParticipantsResponse;
 import org.javacord.api.entity.channel.TextChannel;
@@ -25,8 +26,8 @@ public class MessageWriterFactory {
     }
 
     private MessageWriter getUpdateMessageWriter(TextChannel channel, Update update) {
-        if (update.getSet() != null) {
-            return new SetUpdateMessageWriter(channel, update.getSet());
+        if (update instanceof SetUpdate) {
+            return new SetUpdateMessageWriter(channel, ((SetUpdate)update).getSet());
         }
         return new GenericMessageWriter(channel, update.getDescription());
     }
