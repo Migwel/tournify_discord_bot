@@ -2,6 +2,7 @@ package dev.migwel.tournify.discordbot.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,7 +16,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final static Logger log = LoggerFactory.getLogger(SecurityConfiguration.class);
 
-    protected void configureGlobal(AuthenticationManagerBuilder authBuilder) {
+    @Autowired
+    protected void configure(AuthenticationManagerBuilder authBuilder) {
         try {
             authBuilder.inMemoryAuthentication()
                     .withUser("ws-notification")
@@ -31,8 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/notification/**").hasRole("REMOTE").anyRequest().authenticated()
                 .antMatchers("/**").permitAll()
-                .antMatchers("/rest/**").hasRole("REMOTE").anyRequest().authenticated()
                 .and()
                 .httpBasic()
                 .and()

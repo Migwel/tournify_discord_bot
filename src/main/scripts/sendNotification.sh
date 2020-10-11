@@ -1,1 +1,1 @@
-curl -H "Content-Type: application/json" -X POST -d '{"updates":{"updateList":[{"description":"TEST"}]}}' http://localhost:8091/notification/539042384151838720 | json_pp
+curl -u $USER:$PASSWORD -H "Content-Type: application/json" -X POST -d '{"update":{"@type":"Update","description":"This is a test"}}' $URL | json_pp
