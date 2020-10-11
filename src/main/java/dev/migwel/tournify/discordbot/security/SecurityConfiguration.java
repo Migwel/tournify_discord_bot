@@ -1,5 +1,6 @@
 package dev.migwel.tournify.discordbot.security;
 
+import dev.migwel.tournify.discordbot.properties.NotificationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final static Logger log = LoggerFactory.getLogger(SecurityConfiguration.class);
 
+    private NotificationProperties notificationProperties;
+
+    public SecurityConfiguration(NotificationProperties notificationProperties) {
+        super();
+        this.notificationProperties = notificationProperties;
+    }
+
     @Autowired
     protected void configure(AuthenticationManagerBuilder authBuilder) {
         try {
             authBuilder.inMemoryAuthentication()
-                    .withUser("ws-notification")
-                    .password("ws-notification-password")
+                    .withUser(notificationProperties.getUsername())
+                    .password(notificationProperties.getPassword())
                     .roles("REMOTE");
         } catch (Exception e) {
             log.error("Could not configure authentication", e);
