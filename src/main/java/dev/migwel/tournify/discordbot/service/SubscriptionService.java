@@ -4,6 +4,7 @@ import dev.migwel.tournify.communication.request.SubscriptionRequest;
 import dev.migwel.tournify.communication.response.SubscriptionResponse;
 import dev.migwel.tournify.discordbot.ServerException;
 import dev.migwel.tournify.discordbot.data.Subscription;
+import dev.migwel.tournify.discordbot.properties.NotificationProperties;
 import dev.migwel.tournify.discordbot.properties.TournifyProperties;
 import dev.migwel.tournify.discordbot.store.SubscriptionRepository;
 import org.slf4j.Logger;
@@ -24,11 +25,13 @@ public class SubscriptionService {
     private RestTemplate restTemplate;
     private SubscriptionRepository subscriptionRepository;
     private TournifyProperties tournifyProperties;
+    private NotificationProperties notificationProperties;
 
-    public SubscriptionService(RestTemplate restTemplate, SubscriptionRepository subscriptionRepository, TournifyProperties tournifyProperties) {
+    public SubscriptionService(RestTemplate restTemplate, SubscriptionRepository subscriptionRepository, TournifyProperties tournifyProperties, NotificationProperties notificationProperties) {
         this.restTemplate = restTemplate;
         this.subscriptionRepository = subscriptionRepository;
         this.tournifyProperties = tournifyProperties;
+        this.notificationProperties = notificationProperties;
     }
 
     public void addSubscription(long channelId, String tournamentUrl, @Nullable String playerTag) throws ServerException {
@@ -36,7 +39,9 @@ public class SubscriptionService {
         String callBackUrl = buildCallbackUrl(channelId);
         SubscriptionRequest subscriptionRequest = new SubscriptionRequest(tournamentUrl,
                 callBackUrl,
-                playerTag == null ? Collections.emptyList() : Collections.singletonList(playerTag));
+                playerTag == null ? Collections.emptyList() : Collections.singletonList(playerTag),
+                notificationProperties.getUsername(),
+                notificationProperties.getPassword());
         log.info("Subscribing to "+ tournamentUrl);
         SubscriptionResponse response;
         try {
