@@ -42,7 +42,7 @@ public class AbstractListener implements MessageCreateListener {
                 "Example: @TournifyBot unsubscribe https://smash.gg/tournament/genesis-3/events/melee-singles \n \n" +
                 "To get a list of participants: @mention participants [event URL] \n" +
                 "Example: @TournifyBot participants https://smash.gg/tournament/genesis-3/events/melee-singles \n \n" +
-                "For more commands, check https://github.com/Migwel/tournify_discord_bot \n" +
+                "For more commands, check https://migwel.dev/tournify/2020/10/17/Tournify_Discord_Bot.html \n" +
                 "If you have further questions or suggestions, join the Discord channel at https://discord.gg/D6GvMuR";
     }
 
