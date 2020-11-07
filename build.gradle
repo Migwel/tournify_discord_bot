@@ -34,7 +34,7 @@ dependencies {
     compile 'org.postgresql:postgresql'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.0'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
-    compile 'org.javacord:javacord:3.0.4'
+    compile 'org.javacord:javacord:3.1.0'
     compile 'dev.migwel.tournify:communication:1.0-SNAPSHOT'
 
     testCompile "org.mockito:mockito-core:2.+"
