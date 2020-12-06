@@ -4,6 +4,7 @@ import dev.migwel.tournify.communication.commons.Player;
 import dev.migwel.tournify.communication.commons.Set;
 import org.javacord.api.entity.channel.TextChannel;
 
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class SetUpdateMessageWriter extends AbstractMessageWriter {
@@ -25,7 +26,15 @@ public class SetUpdateMessageWriter extends AbstractMessageWriter {
                 set.getRound() +
                 "] - " +
                 set.getPlayers().stream().map(Player::getDisplayUsername).collect(Collectors.joining(" vs ")) +
-                " - Winner is " +
-                set.getWinners().stream().map(Player::getDisplayUsername).collect(Collectors.joining(" vs "));
+                " - " + buildWinnerMessage(set.getWinners());
+    }
+
+    private String buildWinnerMessage(Collection<Player> winners) {
+        if (winners == null || winners.isEmpty()) {
+            return "It's a draw";
+        }
+
+        return "Winner is " +
+                winners.stream().map(Player::getDisplayUsername).collect(Collectors.joining(" vs "));
     }
 }
