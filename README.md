@@ -24,6 +24,7 @@ The commands endpoints are available:
 Currently, the following tournament hosts are supported:
 * [smash.gg](https://smash.gg/)
 * [challonge.com](https://challonge.com)
+* [chess.com](https://chess.com)
 
 # How to invite Tournify Discord Bot
 To invite the bot to your group, follow the following link: https://discordapp.com/oauth2/authorize?&client_id=221323100476801024&scope=bot&permissions=0
