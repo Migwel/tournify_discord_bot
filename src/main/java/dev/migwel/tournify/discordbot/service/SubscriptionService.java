@@ -52,6 +52,10 @@ public class SubscriptionService {
             throw new ServerException("Could not subscribe to "+ tournamentUrl, e);
         }
 
+        if (! response.isSuccess()) {
+            throw new ServerException("Could not subscribe to "+ tournamentUrl);
+        }
+
         Subscription subscription = subscriptionRepository.findByTournamentUrlAndChannelId(tournamentUrl, channelId);
         if(subscription != null) {
             return;
